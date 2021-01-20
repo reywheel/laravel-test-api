@@ -17,3 +17,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+// TODO:
+// - связи в моделях
+// - фабрики
+// - сидеры
+// - миддлвейр на ответ в json
+
