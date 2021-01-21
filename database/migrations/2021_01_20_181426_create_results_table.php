@@ -16,14 +16,12 @@ class CreateResultsTable extends Migration
         Schema::create('results', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
-            $table->unsignedBigInteger('test_id');
             $table->unsignedBigInteger('question_id');
             $table->string('text');
             $table->boolean('is_correct')->default(false);
             $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('test_id')->references('id')->on('tests')->onDelete('cascade');
             $table->foreign('question_id')->references('id')->on('questions')->onDelete('cascade');
         });
     }
