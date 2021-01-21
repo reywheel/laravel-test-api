@@ -19,7 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 // TODO:
-// - фабрики
-// - сидеры
 // - миддлвейр на ответ в json
 
