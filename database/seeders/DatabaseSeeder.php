@@ -19,10 +19,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $this->call([
-            QuestionTypeSeeder::class
-        ]);
-
         User::factory()->count(10)->create()->each(function ($user) {
             $tests = Test::factory()->count(2)->create()->each(function ($test) use($user) {
                 $questions = Question::factory()->count(5)->create()->each(function ($question) use($user) {

@@ -23,7 +23,7 @@ class QuestionFactory extends Factory
     {
         return [
             'title' => $this->faker->words(6, true),
-            'type_id' => $this->faker->numberBetween(1, 3),
+            'type' => $this->faker->randomElement(['text', 'radio', 'checkbox']),
             'test_id' => 1
         ];
     }

@@ -16,11 +16,10 @@ class CreateQuestionsTable extends Migration
         Schema::create('questions', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->unsignedBigInteger('type_id')->nullable();
+            $table->enum('type', ['text', 'radio', 'checkbox']);
             $table->unsignedBigInteger('test_id');
             $table->timestamps();
 
-            $table->foreign('type_id')->references('id')->on('question_types')->onDelete('set null');
             $table->foreign('test_id')->references('id')->on('tests')->onDelete('cascade');
         });
     }
