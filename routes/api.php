@@ -3,6 +3,7 @@
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\QuestionController;
 use App\Http\Controllers\TestController;
+use App\Http\Controllers\VariantController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -20,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::group(['middleware' => 'auth'], function() {
     Route::apiResource('/tests', TestController::class);
     Route::apiResource('/questions', QuestionController::class)->except(['index']);
+    Route::apiResource('/variants', VariantController::class)->except(['index']);
 });
 
 Route::group([
