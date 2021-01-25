@@ -9,14 +9,20 @@ class Question extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'type',
+        'test_id'
+    ];
+
+    protected $hidden = [
+        'created_at',
+        'updated_at'
+    ];
+
     public function test() {
         return $this->belongsTo(Test::class);
     }
-
-    public function type() {
-        return $this->belongsTo(QuestionType::class);
-    }
-
     public function variants() {
         return $this->hasMany(Variant::class);
     }

@@ -32,7 +32,7 @@ class TestController extends Controller
         $test->fill($request->validated());
         $test->save();
 
-        return response('Test was created', 201);
+        return response('Test was created');
     }
 
     /**
