@@ -20,7 +20,8 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call([
-            BouncerSeeder::class
+            BouncerSeeder::class,
+            UserSeeder::class
         ]);
 
         User::factory()->count(10)->create()->each(function ($user) {
