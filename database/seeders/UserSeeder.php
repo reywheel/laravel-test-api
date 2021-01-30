@@ -16,34 +16,15 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        $adminData = [
-            'first_name' => 'admin',
-            'second_name' => 'admin',
-            'last_name' => 'admin',
-            'date_of_birth' => Carbon::now(),
-            'school' => 'admin school',
-            'email' => 'admin@mail.ru',
-            'password' => Hash::make('123456')
-        ];
+        $admin = User::factory()->createOne([
+            'email' => 'admin@mail.ru'
+        ]);
 
-        $admin = new User();
-        $admin->fill($adminData);
-        $admin->save();
         $admin->assign('admin');
 
-        $studentData = [
-            'first_name' => 'student',
-            'second_name' => 'student',
-            'last_name' => 'student',
-            'date_of_birth' => Carbon::now(),
-            'school' => 'student school',
-            'email' => 'student@mail.ru',
-            'password' => Hash::make('123456')
-        ];
-
-        $student = new User();
-        $student->fill($studentData);
-        $student->save();
+        $student = User::factory()->createOne([
+            'email' => 'student@mail.ru'
+        ]);
         $student->assign('student');
     }
 }

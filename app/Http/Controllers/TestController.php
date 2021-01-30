@@ -4,8 +4,13 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\Test\StoreTestRequest;
 use App\Http\Requests\Test\UpdateTestRequest;
+use App\Models\Question;
+use App\Models\Result;
 use App\Models\Test;
+use App\Models\Variant;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Silber\Bouncer\BouncerFacade as Bouncer;
 
 class TestController extends Controller
 {
@@ -16,7 +21,7 @@ class TestController extends Controller
      */
     public function index()
     {
-        $this->authorize('viewAny', Test::class);
+        $this->authorize('viewAny', new Test());
 
         $tests = Test::all();
         return response($tests);
@@ -30,7 +35,7 @@ class TestController extends Controller
      */
     public function store(StoreTestRequest $request)
     {
-        $this->authorize('create', Test::class);
+        $this->authorize('create', new Test());
 
         $test = new Test();
         $test->fill($request->validated());
@@ -48,9 +53,9 @@ class TestController extends Controller
      */
     public function show($id)
     {
-        $this->authorize('view', Test::class);
-
         $test = Test::findOrFail($id);
+        $this->authorize('view', $test);
+
         return response($test);
     }
 
@@ -63,9 +68,9 @@ class TestController extends Controller
      */
     public function update(UpdateTestRequest $request, $id)
     {
-        $this->authorize('update', Test::class);
-
         $test = Test::findOrFail($id);
+        $this->authorize('update', $test);
+
         $test->fill($request->validated());
         $test->save();
 
@@ -80,9 +85,9 @@ class TestController extends Controller
      */
     public function destroy($id)
     {
-        $this->authorize('delete', Test::class);
-
         $test = Test::findOrFail($id);
+        $this->authorize('delete', $test);
+
         $test->delete();
 
         return response('Test was deleted');

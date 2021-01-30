@@ -16,6 +16,8 @@ class VariantController extends Controller
 
     public function store(StoreVariantRequest $request)
     {
+        $this->authorize('create', new Variant());
+
         $variant = new Variant();
         $variant->fill($request->validated());
         $variant->save();
@@ -26,6 +28,7 @@ class VariantController extends Controller
     public function show($id)
     {
         $variant = Variant::findOrFail($id);
+        $this->authorize('view', $variant);
 
         return response($variant);
     }
@@ -33,6 +36,8 @@ class VariantController extends Controller
     public function update(UpdateVariantRequest $request, $id)
     {
         $variant = Variant::findOrFail($id);
+        $this->authorize('update', $variant);
+
         $variant->fill($request->validated());
         $variant->save();
 
@@ -42,6 +47,8 @@ class VariantController extends Controller
     public function destroy($id)
     {
         $variant = Variant::findOrFail($id);
+        $this->authorize('delete', $variant);
+
         $variant->delete();
 
         return response('Variant was deleted');

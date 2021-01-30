@@ -11,6 +11,8 @@ class QuestionController extends Controller
 {
     public function store(StoreQuestionRequest $request)
     {
+        $this->authorize('create', new Question());
+
         $question = new Question();
         $question->fill($request->validated());
         $question->save();
@@ -21,6 +23,7 @@ class QuestionController extends Controller
     public function show($id)
     {
         $question = Question::findOrFail($id);
+        $this->authorize('view', $question);
 
         return response($question);
     }
@@ -28,6 +31,9 @@ class QuestionController extends Controller
     public function update(UpdateQuestionRequest $request, $id)
     {
         $question = Question::findOrFail($id);
+        $this->authorize('update', $question);
+
+
         $question->fill($request->validated());
         $question->save();
 
@@ -37,6 +43,8 @@ class QuestionController extends Controller
     public function destroy($id)
     {
         $question = Question::findOrFail($id);
+        $this->authorize('delete', $question);
+
         $question->delete();
 
         return response('Question was deleted');
