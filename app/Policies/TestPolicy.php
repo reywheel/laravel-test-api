@@ -10,6 +10,14 @@ class TestPolicy
 {
     use HandlesAuthorization;
 
+    public function before(User $user, $ability) {
+        if ($user->isA('admin')) {
+            return true;
+        }
+
+        return false;
+    }
+
     /**
      * Determine whether the user can view any models.
      *
