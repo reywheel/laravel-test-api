@@ -16,6 +16,8 @@ class TestController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', Test::class);
+
         $tests = Test::all();
         return response($tests);
     }
@@ -28,6 +30,8 @@ class TestController extends Controller
      */
     public function store(StoreTestRequest $request)
     {
+        $this->authorize('create', Test::class);
+
         $test = new Test();
         $test->fill($request->validated());
         $test->save();
@@ -44,6 +48,8 @@ class TestController extends Controller
      */
     public function show($id)
     {
+        $this->authorize('view', Test::class);
+
         $test = Test::findOrFail($id);
         return response($test);
     }
@@ -57,6 +63,8 @@ class TestController extends Controller
      */
     public function update(UpdateTestRequest $request, $id)
     {
+        $this->authorize('update', Test::class);
+
         $test = Test::findOrFail($id);
         $test->fill($request->validated());
         $test->save();
@@ -72,6 +80,8 @@ class TestController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('delete', Test::class);
+
         $test = Test::findOrFail($id);
         $test->delete();
 
